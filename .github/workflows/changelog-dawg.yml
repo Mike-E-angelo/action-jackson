@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    #- uses: dragonspark/action-changelog-dawg@v1
+    - uses: actions/checkout@master
     - name: Generate a CHANGELOG, dawg!
       uses: dragonspark/action-changelog-dawg@master
 ###
