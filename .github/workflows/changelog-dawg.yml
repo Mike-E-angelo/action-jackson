@@ -1,9 +1,6 @@
 name: CHANGELOG, Dawg! Testing UPDATING THE NAME YO
 
-on:
-  release:
-      types: [edited]
-  
+on: [push]
 
 jobs:
   build:
@@ -11,25 +8,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Dump GitHub context
-      env:
-        GITHUB_CONTEXT: ${{ toJson(github) }}
-      run: echo "$GITHUB_CONTEXT"
-    - name: Dump job context
-      env:
-        JOB_CONTEXT: ${{ toJson(job) }}
-      run: echo "$JOB_CONTEXT"
-    - name: Dump steps context
-      env:
-        STEPS_CONTEXT: ${{ toJson(steps) }}
-      run: echo "$STEPS_CONTEXT"
-    - name: Dump runner context
-      env:
-        RUNNER_CONTEXT: ${{ toJson(runner) }}
-      run: echo "$RUNNER_CONTEXT"
-    - name: Dump strategy context
-      env:
-        STRATEGY_CONTEXT: ${{ toJson(strategy) }}
-      run: echo "$STRATEGY_CONTEXT"
+    - uses: actions/checkout@master
+    - name: List contents BEFORE
+      run: |
+           Get-ChildItem .
+           Write-Host "BEFORE! $PWD"
+      shell: pwsh
+    - name: Generate a CHANGELOG, dawg!
+      uses: dragonspark/action-changelog-dawg@master
+    - name: List contents AFTER
+      run: |
+           Get-ChildItem .
+           Write-Host "AFTER! $PWD"
+      shell: pwsh
     
 ###
