@@ -1,6 +1,8 @@
 name: CHANGELOG, Dawg! Testing
 
-on: [release]
+on:
+  release:
+    types: [edited]
 
 jobs:
   build:
