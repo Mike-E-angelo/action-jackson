@@ -28,17 +28,5 @@ jobs:
       env:
         STRATEGY_CONTEXT: ${{ toJson(strategy) }}
       run: echo "$STRATEGY_CONTEXT"
-    - uses: actions/checkout@master
-    - name: List contents BEFORE
-      run: |
-           Get-ChildItem .
-           Write-Host "BEFORE! $PWD"
-      shell: pwsh
-    - name: Generate a CHANGELOG, dawg!
-      uses: dragonspark/action-changelog-dawg@master
-    - name: List contents AFTER
-      run: |
-           Get-ChildItem .
-           Write-Host "AFTER! $PWD"
-      shell: pwsh
+    
 ###
