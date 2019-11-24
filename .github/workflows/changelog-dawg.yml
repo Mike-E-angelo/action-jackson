@@ -1,6 +1,9 @@
 name: CHANGELOG, Dawg! Testing UPDATING THE NAME YO
 
-on: [push, release]
+on:
+  release:
+      - types: [edited]
+  
 
 jobs:
   build:
