@@ -27,5 +27,5 @@ jobs:
            Set-Content CHANGELOG.md $env:CHANGELOG           
            Write-Host "After: $PWD"
            Get-ChildItem .
-      shell: pwsh    
+      shell: pwsh
 ###
