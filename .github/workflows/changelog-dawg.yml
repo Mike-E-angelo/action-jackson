@@ -28,7 +28,7 @@ jobs:
       - uses: actions/checkout@master
         with:
           repository: Mike-EEE/action-jackson.wiki
-          ref: refs/heads/master
+          # ref: refs/heads/master
           path: ./action-jackson
       - name: List contents After Checkout
         run: |
@@ -39,6 +39,14 @@ jobs:
         with:
           name: store
           path: ./
+      - name: Add and Commit
+        run: |
+             git commit -m "Add changes" -a
+        shell: pwsh
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: after
         run: |
              Write-Host "After: $PWD"
