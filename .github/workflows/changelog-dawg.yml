@@ -27,7 +27,7 @@ jobs:
         shell: pwsh
       - uses: actions/checkout@master
         with:
-          repository: Mike-EEE/action-jackson.wiki.git
+          repository: Mike-EEE/action-jackson
           ref: refs/heads/master
       - name: List contents After Checkout
         run: |
