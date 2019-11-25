@@ -19,13 +19,13 @@ jobs:
       with:
         access_token: ${{ secrets.GITHUB_TOKEN }}
     - name: Results
+      env:
+        CHANGELOG: ${{ steps.generate.outputs.result }}
       run: |
            Write-Host "Before: $PWD"
            Get-ChildItem .
-           "${{ steps.generate.outputs.result }}"
-#           Set-Content CHANGELOG.md ${{ steps.generate.outputs.result }}
-           
- #          Write-Host "After: $PWD"
-#           Get-ChildItem .
+           Set-Content CHANGELOG.md $env:CHANGELOG           
+           Write-Host "After: $PWD"
+           Get-ChildItem .
       shell: pwsh    
 ###
