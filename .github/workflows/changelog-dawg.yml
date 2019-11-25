@@ -16,6 +16,8 @@ jobs:
 #      shell: pwsh
     - name: Generate a CHANGELOG, dawg!
       uses: dragonspark/action-changelog-dawg@master
+      with:
+        access_token: ${{ secrets.GITHUB_TOKEN }}
 #    - name: List contents AFTER
 #      run: |
 #           Get-ChildItem .
