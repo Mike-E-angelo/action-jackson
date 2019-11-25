@@ -20,22 +20,22 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: store
-        path: ${{ steps.generate.outputs.filename }}        
+        path: '${{ steps.generate.outputs.filename }}'
   
-#  load_and_commit:
-#    runs-on: ubuntu-latest
-#    if: never()
-#    steps:
-#       - name: Download math result for job 1
-#         uses: actions/download-artifact@v1
-#         with:
-#           name: store
-#       - name: after
-#         run: |
-#              Write-Host "After: $PWD"
-#              Get-ChildItem .
-#              # Set-Content CHANGELOG.md $env:CHANGELOG           
-#              # Write-Host "After: $PWD"
- #             # Get-ChildItem .
-  #       shell: pwsh
+  load_and_commit:
+    runs-on: ubuntu-latest
+    needs: [generate_and_store]    
+    steps:
+       - name: Download math result for job 1
+         uses: actions/download-artifact@v1
+         with:
+           name: store
+       - name: after
+         run: |
+              Write-Host "After: $PWD"
+              Get-ChildItem .
+              # Set-Content CHANGELOG.md $env:CHANGELOG           
+              # Write-Host "After: $PWD"
+              # Get-ChildItem .
+         shell: pwsh
 ###
