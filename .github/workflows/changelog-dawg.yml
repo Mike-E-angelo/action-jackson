@@ -26,6 +26,5 @@ jobs:
            
            Write-Host "After: $PWD"
            Get-ChildItem .
-      shell: pwsh
-    
+      shell: pwsh    
 ###
