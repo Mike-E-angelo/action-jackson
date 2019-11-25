@@ -59,6 +59,7 @@ jobs:
         run: |
              Write-Host "After: $PWD"
              Get-ChildItem .
+             git status
              # Set-Content CHANGELOG.md $env:CHANGELOG           
              # Write-Host "After: $PWD"
              # Get-ChildItem .
