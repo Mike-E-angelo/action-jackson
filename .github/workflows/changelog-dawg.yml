@@ -20,7 +20,7 @@ jobs:
       env:
         CHANGELOG: '${{ steps.generate.outputs.result }}'
       run: |
-           Write-Host "Before: $PWD"
+           Write-Host "Before: $PWD: $($env:CHANGELOG)"
            Get-ChildItem .
            Set-Content CHANGELOG.md $env:CHANGELOG           
            Write-Host "After: $PWD"
