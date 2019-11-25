@@ -18,14 +18,14 @@ jobs:
       uses: dragonspark/action-changelog-dawg@master
       with:
         access_token: ${{ secrets.GITHUB_TOKEN }}
-    - name: Results
+    - name: after
       env:
-        CHANGELOG: ${{ steps.generate.outputs.result }}
+        CHANGELOG: '${{ steps.generate.outputs.result }}'
       run: |
            Write-Host "Before: $PWD"
-           Get-ChildItem .
-           Set-Content CHANGELOG.md $env:CHANGELOG           
-           Write-Host "After: $PWD"
-           Get-ChildItem .
+#           Get-ChildItem .
+#           Set-Content CHANGELOG.md $env:CHANGELOG           
+#           Write-Host "After: $PWD"
+#           Get-ChildItem .
       shell: pwsh    
 ###
