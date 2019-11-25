@@ -3,7 +3,7 @@ name: CHANGELOG, Dawg!
 on: [push]
 
 jobs:
-  generate and store:
+  generate_and_store:
     runs-on: ubuntu-latest
     steps:
 #    - uses: actions/checkout@master
@@ -22,7 +22,7 @@ jobs:
         name: store
         path: ${{ steps.generate.inputs.filename }}        
   
-  load and commit:
+  load_and_commit:
     runs-on: ubuntu-latest
     steps:
        - name: Download math result for job 1
