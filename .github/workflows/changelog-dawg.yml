@@ -23,9 +23,9 @@ jobs:
         CHANGELOG: '${{ steps.generate.outputs.result }}'
       run: |
            Write-Host "Before: $PWD"
-#           Get-ChildItem .
-#           Set-Content CHANGELOG.md $env:CHANGELOG           
-#           Write-Host "After: $PWD"
-#           Get-ChildItem .
+           Get-ChildItem .
+           Set-Content CHANGELOG.md $env:CHANGELOG           
+           Write-Host "After: $PWD"
+           Get-ChildItem .
       shell: pwsh    
 ###
