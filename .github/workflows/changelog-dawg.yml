@@ -20,7 +20,7 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: store
-        path: ${{ steps.generate.inputs.filename }}        
+        path: ${{ steps.generate.outputs.filename }}        
   
   load_and_commit:
     runs-on: ubuntu-latest
