@@ -3,7 +3,7 @@ name: CHANGELOG, Dawg!
 on: [push]
 
 env:
-  DEPLOY_USER: Mike-EEE's GitHub Action Identity
+  DEPLOY_USER: "GitHub Action Automation Identity: Action Jackson"
   DEPLOY_EMAIL: mike-eee@noreply.users.github.com
 
 jobs:
@@ -54,7 +54,7 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           repository: Mike-EEE/action-jackson.wiki
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: after
         run: |
              Write-Host "After: $PWD"
