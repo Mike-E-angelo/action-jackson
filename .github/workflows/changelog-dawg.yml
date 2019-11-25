@@ -3,7 +3,7 @@ name: CHANGELOG, Dawg!
 on: [push]
 
 jobs:
-  build:
+  generate and store:
     runs-on: ubuntu-latest
     steps:
 #    - uses: actions/checkout@master
@@ -16,14 +16,25 @@ jobs:
       uses: dragonspark/action-changelog-dawg@master
       with:
         access_token: ${{ secrets.GITHUB_TOKEN }}
-    - name: after
-      env:
-        CHANGELOG: ${{ steps.generate.outputs.result }}
-      run: |
-           Write-Host "Before: $PWD - $($env:CHANGELOG)"
-           Get-ChildItem .
-           Set-Content CHANGELOG.md $env:CHANGELOG           
-           Write-Host "After: $PWD"
-           Get-ChildItem .
-      shell: pwsh
+    - name: Upload CHANGELOG
+      uses: actions/upload-artifact@v1
+      with:
+        name: store
+        path: ${{ steps.generate.inputs.filename }}        
+  
+  load and commit:
+    runs-on: ubuntu-latest
+    steps:
+       - name: Download math result for job 1
+         uses: actions/download-artifact@v1
+         with:
+           name: store
+       - name: after
+         run: |
+              Write-Host "After: $PWD"
+              Get-ChildItem .
+              # Set-Content CHANGELOG.md $env:CHANGELOG           
+              # Write-Host "After: $PWD"
+              # Get-ChildItem .
+         shell: pwsh
 ###
