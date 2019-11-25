@@ -22,9 +22,9 @@ jobs:
       run: |
            Write-Host "Before: $PWD"
            Get-ChildItem .
-           Set-Content CHANGELOG.md ${{ steps.generate.outputs.result }}
+#           Set-Content CHANGELOG.md ${{ steps.generate.outputs.result }}
            
-           Write-Host "After: $PWD"
-           Get-ChildItem .
+ #          Write-Host "After: $PWD"
+#           Get-ChildItem .
       shell: pwsh    
 ###
