@@ -54,14 +54,11 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           repository: Mike-EEE/action-jackson.wiki
-          # github_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: after
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Workspace Status
         run: |
              Write-Host "After: $PWD"
              Get-ChildItem .
-             git status
-             # Set-Content CHANGELOG.md $env:CHANGELOG           
-             # Write-Host "After: $PWD"
-             # Get-ChildItem .
+             git status -uno
         shell: pwsh
 ###
