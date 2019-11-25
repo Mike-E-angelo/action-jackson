@@ -47,7 +47,7 @@ jobs:
         run: |
              git config user.email $env:DEPLOY_EMAIL
              git config user.name $env:DEPLOY_USER
-             git add -A 2>&1
+             git add -A # 2>&1
              git commit -m "Adding CHANGELOG.md" -a
         shell: pwsh
       - name: Push changes
