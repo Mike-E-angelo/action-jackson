@@ -14,14 +14,18 @@ jobs:
 #           Get-ChildItem .
 #           Write-Host "BEFORE! $PWD"
 #      shell: pwsh
-    - name: Generate a CHANGELOG, dawg!
+    - name: generate
       uses: dragonspark/action-changelog-dawg@master
       with:
         access_token: ${{ secrets.GITHUB_TOKEN }}
-#    - name: List contents AFTER
-#      run: |
-#           Get-ChildItem .
-#           Write-Host "AFTER! $PWD"
-#      shell: pwsh
+    - name: List contents AFTER
+      run: |
+           Write-Host "Before: $PWD"
+           Get-ChildItem .
+           Set-Content CHANGELOG.md ${{ steps.generate.outputs.result }}
+           
+           Write-Host "After: $PWD"
+           Get-ChildItem .
+      shell: pwsh
     
 ###
