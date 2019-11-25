@@ -3,8 +3,8 @@ name: CHANGELOG, Dawg!
 on: [push]
 
 env:
-  DEPLOY_USER: "GitHub Action Automation Identity: Action Jackson"
-  DEPLOY_EMAIL: mike-eee@noreply.users.github.com
+  DEPLOY_USER: "Mike-EEE's GitHub Action Automation Agent"
+  DEPLOY_EMAIL: Mike-EEE@users.noreply.github.com
 
 jobs:
   generate_and_store:
@@ -60,5 +60,6 @@ jobs:
              Write-Host "After: $PWD"
              Get-ChildItem .
              git status -sb
+             git status
         shell: pwsh
 ###
