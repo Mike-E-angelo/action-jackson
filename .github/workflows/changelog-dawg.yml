@@ -36,6 +36,7 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: store
+          path: ./
       - name: after
         run: |
              Write-Host "After: $PWD"
