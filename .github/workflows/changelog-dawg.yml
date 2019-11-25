@@ -32,9 +32,9 @@ jobs:
              Get-ChildItem .
         shell: pwsh
       - uses: actions/checkout@master
-        #with:
+        with:
          # repository: Mike-EEE/action-jackson.wiki
-          #ref: refs/heads/master
+          ref: refs/heads/master
           #path: ./action-jackson
       - name: List contents After Checkout
         run: |
