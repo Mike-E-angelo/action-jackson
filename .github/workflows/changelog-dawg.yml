@@ -38,7 +38,7 @@ jobs:
         run: |
              Get-ChildItem .
         shell: pwsh
-      - name: Download math result for job 1
+      - name: Download the CHANGELOG, dawg!
         uses: actions/download-artifact@v1
         with:
           name: store
@@ -47,7 +47,8 @@ jobs:
         run: |
              git config user.email $env:DEPLOY_EMAIL
              git config user.name $env:DEPLOY_USER
-             git commit -m "Add changes" -a
+             git add -A 2>&1
+             git commit -m "Adding CHANGELOG.md" -a
         shell: pwsh
       - name: Push changes
         uses: ad-m/github-push-action@master
