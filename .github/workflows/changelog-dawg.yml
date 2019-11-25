@@ -27,8 +27,9 @@ jobs:
         shell: pwsh
       - uses: actions/checkout@master
         with:
-          repository: Mike-EEE/action-jackson
+          repository: Mike-EEE/action-jackson.wiki
           ref: refs/heads/master
+          path: ./action-jackson
       - name: List contents After Checkout
         run: |
              Get-ChildItem .
