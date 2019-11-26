@@ -7,6 +7,7 @@ on:
 env:
   DEPLOY_USER: "Mike-EEE's GitHub Action Automation Agent"
   DEPLOY_EMAIL: Mike-EEE@users.noreply.github.com
+  DEPLOY_COMMIT_MESSAGE: Adding CHANGELOG.md
 
 jobs:
   generate_and_save:
@@ -56,6 +57,11 @@ jobs:
           repository: ${{ github.repository }}.wiki
           ref: refs/heads/master
           path: ./${{ github.event.repository.name }}
+      - name: Download the CHANGELOG, dawg!
+        uses: actions/download-artifact@v1
+        with:
+          name: store
+          path: ./
       - name: Add and Commit
         run: |
              git config user.email $env:DEPLOY_EMAIL
