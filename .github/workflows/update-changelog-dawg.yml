@@ -53,7 +53,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
         with:
-          repository: Mike-EEE/action-jackson.wiki
+          repository: '${GITHUB_REPOSITORY}.wiki'
           ref: refs/heads/master
           path: ./action-jackson
       - name: Download the CHANGELOG, dawg!
@@ -71,5 +71,5 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          repository: Mike-EEE/action-jackson.wiki
+          repository: '${GITHUB_REPOSITORY}.wiki'
           github_token: ${{ secrets.GITHUB_TOKEN }}
