@@ -1,4 +1,4 @@
-name: CI
+name: Manual Build Trigger
 
 on: [push]
 
@@ -22,7 +22,7 @@ jobs:
                accountName="ExtendedXmlSerializer"
                projectSlug="action-jackson"
                branch="master"
-               commitId="fristv1"
+               commitId="v2FRIST"
            }
            $body = $body | ConvertTo-Json
 
