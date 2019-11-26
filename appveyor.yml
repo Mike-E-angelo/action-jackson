@@ -6,17 +6,11 @@ image: Visual Studio 2019
 only_commits:
   author: /Automation Agent/
 
-install:
+init:
   - ps: |
-        $first = $env:APPVEYOR_FORCED_BUILD
-        $second = $env:APPVEYOR_REPO_COMMIT_AUTHOR -like "*Automation Agent*"
-        $valid = $first -and $second
-        $first
-        $second
-        $valid
+        $valid = $env:APPVEYOR_FORCED_BUILD -and $env:APPVEYOR_REPO_COMMIT_AUTHOR -like "*Automation Agent*"
         if (!$valid)
         {
-            Get-ChildItem Env:
             throw "This build environment is only intended for externally configured automated processes."
         }
         
