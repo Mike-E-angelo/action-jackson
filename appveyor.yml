@@ -6,7 +6,7 @@ branches:
 only_commits:
   author: /GitHub Action Automation/
 
-init:
+install:
   - ps: |
         $first = $env:APPVEYOR_FORCED_BUILD
         $second = $env:APPVEYOR_REPO_COMMIT_AUTHOR -contains "*Automation Agent*"
