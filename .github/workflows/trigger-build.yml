@@ -23,6 +23,10 @@ jobs:
                projectSlug="action-jackson"
                branch="master"
                commitId="v2FRIST"
+               authorName="asdf1"
+               authorUsername="asdf2"
+               committerName="asdf3"
+               committerUsername="asdf4"
            }
            $body = $body | ConvertTo-Json
 
