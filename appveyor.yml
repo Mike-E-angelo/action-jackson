@@ -8,7 +8,8 @@ only_commits:
 
 init:
   - ps: |
-        if (!$env:APPVEYOR_FORCED_BUILD)
+        $valid = $env:APPVEYOR_FORCED_BUILD -and $env:APPVEYOR_REPO_COMMIT_AUTHOR -contains "GitHub Action Automation"
+        if (!$valid)
         {
             throw "This build environment is only intended for externally configured automated processes."
         }
