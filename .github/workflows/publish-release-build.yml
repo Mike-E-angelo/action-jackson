@@ -8,6 +8,7 @@ env:
   DEPLOY_USER: "Mike-EEE's GitHub Action Automation Agent"
   DEPLOY_EMAIL: "Mike-EEE@users.noreply.github.com"
   DEPLOY_COMMIT_MESSAGE: Adding CHANGELOG.md
+  DEPLOY_ACCOUNT: ExtendedXmlSerializer
   DEPLOY_SLUG: action-jackson  
 
 jobs:
@@ -90,6 +91,7 @@ jobs:
            }
 
            $body = @{
+             accountName = $env:DEPLOY_ACCOUNT
              projectSlug = $env:DEPLOY_SLUG
              commitId = "${{ github.event.release.tag_name }}"
              environmentVariables = @{
