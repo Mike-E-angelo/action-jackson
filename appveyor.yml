@@ -8,9 +8,15 @@ only_commits:
 
 init:
   - ps: |
-        $valid = $env:APPVEYOR_FORCED_BUILD -and $env:APPVEYOR_REPO_COMMIT_AUTHOR -contains "*Automation Agent*"
+        $first = $env:APPVEYOR_FORCED_BUILD
+        $second = $env:APPVEYOR_REPO_COMMIT_AUTHOR -contains "*Automation Agent*"
+        $valid = $first -and $second
+        $first
+        $second
+        $valid
         if (!$valid)
         {
+            Get-ChildItem Env:
             throw "This build environment is only intended for externally configured automated processes."
         }
         
