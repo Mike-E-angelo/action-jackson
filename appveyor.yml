@@ -9,7 +9,7 @@ only_commits:
 install:
   - ps: |
         $first = $env:APPVEYOR_FORCED_BUILD
-        $second = $env:APPVEYOR_REPO_COMMIT_AUTHOR -contains "*Automation Agent*"
+        $second = $env:APPVEYOR_REPO_COMMIT_AUTHOR -like "*Automation Agent*"
         $valid = $first -and $second
         $first
         $second
