@@ -7,6 +7,7 @@ on:
 env:
   DEPLOY_USER: "Mike-EEE's GitHub Action Automation Agent"
   DEPLOY_EMAIL: "Mike-EEE@users.noreply.github.com"
+  DEPLOY_SLUG: action-jackson
 
 jobs:
   generate_and_save:
@@ -53,9 +54,9 @@ jobs:
     steps:
       - uses: actions/checkout@master
         with:
-          repository: Mike-EEE/action-jackson.wiki
+          repository: '${GITHUB_REPOSITORY}.wiki'
           ref: refs/heads/master
-          path: ./action-jackson
+          path: './${{ github.event.repository.name }}'
       - name: Download the CHANGELOG, dawg!
         uses: actions/download-artifact@v1
         with:
@@ -71,7 +72,7 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          repository: Mike-EEE/action-jackson.wiki
+          repository: '${GITHUB_REPOSITORY}.wiki'
           github_token: ${{ secrets.GITHUB_TOKEN }}
   
   build:
@@ -88,16 +89,13 @@ jobs:
            }
 
            $body = @{
-               accountName="ExtendedXmlSerializer"
-               projectSlug="action-jackson"
-               branch="master"
-               commitId="${{ github.event.release.tag_name }}"
-               environmentVariables = @{
-                 APPVEYOR_REPO_COMMIT_AUTHOR = $env:DEPLOY_USER
-                 APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL = $env:DEPLOY_EMAIL
-               }
-           }
-           $body = $body | ConvertTo-Json
-
-           Invoke-RestMethod -Uri 'https://ci.appveyor.com/api/builds' -Headers $headers  -Body $body -Method POST
+             projectSlug = $env:DEPLOY_SLUG
+             commitId = "${{ github.event.release.tag_name }}"
+             environmentVariables = @{
+               APPVEYOR_REPO_COMMIT_AUTHOR = $env:DEPLOY_USER
+               APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL = $env:DEPLOY_EMAIL
+             }
+           } | ConvertTo-Json
+           
+           Invoke-RestMethod POST 'https://ci.appveyor.com/api/builds' -Headers $headers  -Body $body
       shell: pwsh
