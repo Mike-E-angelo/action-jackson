@@ -6,7 +6,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    
     steps:
     # - uses: actions/checkout@v1
     # - name: Run a one-line script
@@ -23,7 +23,10 @@ jobs:
                projectSlug="action-jackson"
                branch="master"
                commitId="v2FRIST"
-               environmentVariables=@{APPVEYOR_REPO_COMMIT_AUTHOR="Override! ASDF"}
+               environmentVariables=@{
+                 APPVEYOR_REPO_COMMIT_AUTHOR="Mike-EEE's GitHub Action Automation Agent"
+                 APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL="Mike-EEE@users.noreply.github.com"
+               }
            }
            $body = $body | ConvertTo-Json
 
