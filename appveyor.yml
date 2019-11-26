@@ -6,7 +6,7 @@ image: Visual Studio 2019
 only_commits:
   author: /Automation Agent/
 
-init:
+install:
   - ps: |
         $first = $env:APPVEYOR_FORCED_BUILD
         $second = $env:APPVEYOR_REPO_COMMIT_AUTHOR -like "*Automation Agent*"
