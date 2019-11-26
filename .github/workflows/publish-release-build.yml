@@ -1,0 +1,103 @@
+name: Publish Release Build
+
+on:
+  release:
+    types: [published]
+
+env:
+  DEPLOY_USER: "Mike-EEE's GitHub Action Automation Agent"
+  DEPLOY_EMAIL: "Mike-EEE@users.noreply.github.com"
+
+jobs:
+  generate_and_save:
+    runs-on: ubuntu-latest
+    steps:
+    - id: generate
+      name: Generate CHANGELOG, dawg!
+      uses: dragonspark/action-changelog-dawg@master
+      with:
+        access_token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Upload CHANGELOG
+      uses: actions/upload-artifact@v1
+      with:
+        name: store
+        path: '${{ steps.generate.outputs.filename }}'
+
+  load_and_push:
+    runs-on: ubuntu-latest
+    needs: [generate_and_save]    
+    steps:
+      - uses: actions/checkout@master
+        with:
+          ref: refs/heads/master
+      - name: Download the CHANGELOG, dawg!
+        uses: actions/download-artifact@v1
+        with:
+          name: store
+          path: ./
+      - name: Add and Commit
+        run: |
+             git config user.email $env:DEPLOY_EMAIL
+             git config user.name $env:DEPLOY_USER
+             git add -A 2>&1
+             git commit -m "Adding CHANGELOG.md"
+        shell: pwsh
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+  load_and_push_to_wiki:
+    runs-on: ubuntu-latest
+    needs: [generate_and_save]    
+    steps:
+      - uses: actions/checkout@master
+        with:
+          repository: Mike-EEE/action-jackson.wiki
+          ref: refs/heads/master
+          path: ./action-jackson
+      - name: Download the CHANGELOG, dawg!
+        uses: actions/download-artifact@v1
+        with:
+          name: store
+          path: ./
+      - name: Add and Commit
+        run: |
+             git config user.email $env:DEPLOY_EMAIL
+             git config user.name $env:DEPLOY_USER
+             git add -A 2>&1
+             git commit -m "Adding CHANGELOG.md"
+        shell: pwsh
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          repository: Mike-EEE/action-jackson.wiki
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+  
+  build:
+    needs: [load_and_push, load_and_push_to_wiki]
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Initiate Build Process
+      run: |
+           $headers = @{
+             "Authorization" = "Bearer ${{ secrets.API_APPVEYOR_TOKEN }}"
+             "Content-type" = "application/json"
+           }
+
+           $body = @{
+               accountName="ExtendedXmlSerializer"
+               projectSlug="action-jackson"
+               branch="master"
+               commitId="${{ github.event.release.tag_name }}"
+               environmentVariables = @{
+                 APPVEYOR_REPO_COMMIT_AUTHOR = $env:DEPLOY_USER
+                 APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL = $env:DEPLOY_EMAIL
+               }
+           }
+           $body = $body | ConvertTo-Json
+
+           Invoke-RestMethod -Uri 'https://ci.appveyor.com/api/builds' -Headers $headers  -Body $body -Method POST
+      shell: pwsh
