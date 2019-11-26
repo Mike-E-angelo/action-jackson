@@ -22,7 +22,7 @@ jobs:
              git config user.email $env:DEPLOY_EMAIL
              git config user.name $env:DEPLOY_USER
              git add -A 2>&1
-             git commit -m "${DEPLOY_COMMIT_MESSAGE}"
+             git commit -m "$DEPLOY_COMMIT_MESSAGE"
         shell: pwsh
       - name: Push changes
         uses: ad-m/github-push-action@master
