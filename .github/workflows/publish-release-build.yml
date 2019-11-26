@@ -9,7 +9,8 @@ env:
   DEPLOY_EMAIL: "Mike-EEE@users.noreply.github.com"
   DEPLOY_COMMIT_MESSAGE: Adding CHANGELOG.md
   DEPLOY_ACCOUNT: ExtendedXmlSerializer
-  DEPLOY_SLUG: action-jackson  
+  DEPLOY_SLUG: action-jackson
+  DEPLOY_BRANCH: master
 
 jobs:
   generate_and_save:
@@ -93,6 +94,7 @@ jobs:
            $body = @{
              accountName = $env:DEPLOY_ACCOUNT
              projectSlug = $env:DEPLOY_SLUG
+             branch = $env:DEPLOY_BRANCH
              commitId = "${{ github.event.release.tag_name }}"
              environmentVariables = @{
                APPVEYOR_REPO_COMMIT_AUTHOR = $env:DEPLOY_USER
