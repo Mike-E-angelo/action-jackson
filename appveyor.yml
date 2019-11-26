@@ -4,7 +4,7 @@ branches:
   - /\d*\.\d*\.\d*/
 
 only_commits:
-  author: /*GitHub Action Automation*/
+  author: /GitHub Action Automation/
 
 init:
   - ps: |
