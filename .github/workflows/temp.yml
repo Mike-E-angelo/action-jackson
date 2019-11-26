@@ -1,0 +1,56 @@
+name: Temp test
+
+on: [push]
+  
+
+env:
+  DEPLOY_USER: "Mike-EEE's GitHub Action Automation Agent"
+  DEPLOY_EMAIL: "Mike-EEE@users.noreply.github.com"
+  DEPLOY_SLUG: action-jackson
+
+jobs:
+  load_and_push_to_wiki:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+        with:
+          repository: '${GITHUB_REPOSITORY}.wiki'
+          ref: refs/heads/master
+          path: './${{ github.event.repository.name }}'
+      - name: Add and Commit
+        run: |
+             git config user.email $env:DEPLOY_EMAIL
+             git config user.name $env:DEPLOY_USER
+             git add -A 2>&1
+             git commit -m "Adding CHANGELOG.md"
+        shell: pwsh
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          repository: '${GITHUB_REPOSITORY}.wiki'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+  
+  
+    needs: [load_and_push, load_and_push_to_wiki]
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Initiate Build Process
+      run: |
+           $headers = @{
+             "Authorization" = "Bearer ${{ secrets.API_APPVEYOR_TOKEN }}"
+             "Content-type" = "application/json"
+           }
+
+           $body = @{
+             projectSlug = $env:DEPLOY_SLUG
+             commitId = "${{ github.event.release.tag_name }}"
+             environmentVariables = @{
+               APPVEYOR_REPO_COMMIT_AUTHOR = $env:DEPLOY_USER
+               APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL = $env:DEPLOY_EMAIL
+             }
+           } | ConvertTo-Json
+           
+           Invoke-RestMethod POST 'https://ci.appveyor.com/api/builds' -Headers $headers  -Body $body
+      shell: pwsh
