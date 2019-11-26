@@ -29,8 +29,6 @@ jobs:
         with:
           repository: '${GITHUB_REPOSITORY}.wiki'
           github_token: ${{ secrets.GITHUB_TOKEN }}
-  
-  
     needs: [load_and_push, load_and_push_to_wiki]
     
     runs-on: ubuntu-latest
@@ -53,4 +51,4 @@ jobs:
            } | ConvertTo-Json
            
            Invoke-RestMethod POST 'https://ci.appveyor.com/api/builds' -Headers $headers  -Body $body
-      shell: pwsh
+      shell: 
