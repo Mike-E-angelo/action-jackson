@@ -8,12 +8,7 @@ only_commits:
 
 init:
   - ps: |
-        $env:APPVEYOR_FORCED_BUILD
-        $env:APPVEYOR_REPO_COMMIT_AUTHOR
-        $env:APPVEYOR_REPO_COMMIT_AUTHOR -contains "GitHub Action Automation"
-        
-        Get-ChildItem Env:
-        $valid = $env:APPVEYOR_FORCED_BUILD -and $env:APPVEYOR_REPO_COMMIT_AUTHOR -contains "GitHub Action Automation"
+        $valid = $env:APPVEYOR_FORCED_BUILD -and $env:APPVEYOR_REPO_COMMIT_AUTHOR -contains "*Automation Agent*"
         if (!$valid)
         {
             throw "This build environment is only intended for externally configured automated processes."
