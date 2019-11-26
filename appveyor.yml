@@ -1,7 +1,7 @@
 image: Visual Studio 2019
-# branches:
-#  only:
-#  - /\d*\.\d*\.\d*/
+branches:
+  only:
+  - /\d*\.\d*\.\d*/
 
 only_commits:
   author: /Automation Agent/
