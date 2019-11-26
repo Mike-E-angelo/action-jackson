@@ -98,5 +98,5 @@ jobs:
              }
            } | ConvertTo-Json
            
-           Invoke-RestMethod POST 'https://ci.appveyor.com/api/builds' -Headers $headers  -Body $body
+           Invoke-RestMethod 'https://ci.appveyor.com/api/builds' -Method POST -Headers $headers -Body $body
       shell: pwsh
