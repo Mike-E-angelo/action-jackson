@@ -8,7 +8,11 @@ branches:
   # files:
   #  - '.github\**\*.*'
 
-install:
+init:
   - ps: |
         Write-Host "HELLO WORLD!"
         Get-ChildItem Env: | Where-Object { $_.Name.StartsWith( "APPVEYOR" ) }
+        
+# disable build and test pahses
+build: off
+test: off
