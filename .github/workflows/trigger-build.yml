@@ -2,7 +2,7 @@ name: Release Build Trigger
 
 on:
   release:
-    types: [publish]
+    types: [published]
 
 jobs:
   build:
