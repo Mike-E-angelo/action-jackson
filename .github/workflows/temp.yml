@@ -1,7 +1,6 @@
 name: Temp test
 
 on: [push]
-  
 
 env:
   DEPLOY_USER: "Mike-EEE's GitHub Action Automation Agent"
