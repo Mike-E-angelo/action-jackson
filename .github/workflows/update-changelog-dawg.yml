@@ -40,7 +40,7 @@ jobs:
              git config user.email $env:DEPLOY_EMAIL
              git config user.name $env:DEPLOY_USER
              git add -A 2>&1
-             git commit -m "Adding CHANGELOG.md"
+             git commit -m $env:DEPLOY_COMMIT_MESSAGE
         shell: pwsh
       - name: Push changes
         uses: ad-m/github-push-action@master
@@ -53,23 +53,18 @@ jobs:
     steps:
       - uses: actions/checkout@master
         with:
-          repository: '${GITHUB_REPOSITORY}.wiki'
+          repository: ${{ github.repository }}.wiki
           ref: refs/heads/master
-          path: './${{ github.event.repository.name }}'
-      - name: Download the CHANGELOG, dawg!
-        uses: actions/download-artifact@v1
-        with:
-          name: store
-          path: ./
+          path: ./${{ github.event.repository.name }}
       - name: Add and Commit
         run: |
              git config user.email $env:DEPLOY_EMAIL
              git config user.name $env:DEPLOY_USER
              git add -A 2>&1
-             git commit -m "Adding CHANGELOG.md"
+             git commit -m $env:DEPLOY_COMMIT_MESSAGE
         shell: pwsh
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          repository: '${GITHUB_REPOSITORY}.wiki'
+          repository: ${{ github.repository }}.wiki
           github_token: ${{ secrets.GITHUB_TOKEN }}
