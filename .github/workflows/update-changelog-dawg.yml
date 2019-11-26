@@ -1,4 +1,4 @@
-name: CHANGELOG, Dawg!
+name: Update the CHANGELOG, Dawg!
 
 on:
   release:
@@ -27,19 +27,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: [generate_and_save]    
     steps:
-      - name: List contents Before Checkout
-        run: |
-             Get-ChildItem .
-        shell: pwsh
       - uses: actions/checkout@master
         with:
-         # repository: Mike-EEE/action-jackson.wiki
           ref: refs/heads/master
-          #path: ./action-jackson
-      - name: List contents After Checkout
-        run: |
-             Get-ChildItem .
-        shell: pwsh
       - name: Download the CHANGELOG, dawg!
         uses: actions/download-artifact@v1
         with:
@@ -55,33 +45,17 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-          # repository: Mike-EEE/action-jackson.wiki
           github_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Workspace Status
-        run: |
-             Write-Host "After: $PWD"
-             Get-ChildItem .
-             git status -sb
-             git status
-        shell: pwsh
 
   load_and_push_to_wiki:
     runs-on: ubuntu-latest
     needs: [generate_and_save]    
     steps:
-      - name: List contents Before Checkout
-        run: |
-             Get-ChildItem .
-        shell: pwsh
       - uses: actions/checkout@master
         with:
           repository: Mike-EEE/action-jackson.wiki
           ref: refs/heads/master
           path: ./action-jackson
-      - name: List contents After Checkout
-        run: |
-             Get-ChildItem .
-        shell: pwsh
       - name: Download the CHANGELOG, dawg!
         uses: actions/download-artifact@v1
         with:
@@ -99,11 +73,3 @@ jobs:
         with:
           repository: Mike-EEE/action-jackson.wiki
           github_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Workspace Status
-        run: |
-             Write-Host "After: $PWD"
-             Get-ChildItem .
-             git status -sb
-             git status
-        shell: pwsh
-###
