@@ -2,7 +2,7 @@ name: CHANGELOG, Dawg!
 
 on:
   release:
-    types: [published, unpublished, edited, deleted]
+    types: [unpublished, edited, deleted]
 
 env:
   DEPLOY_USER: "Mike-EEE's GitHub Action Automation Agent"
