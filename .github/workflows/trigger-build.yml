@@ -23,10 +23,10 @@ jobs:
                projectSlug="action-jackson"
                branch="master"
                commitId="v2FRIST-1.0.1"
-               environmentVariables=@{
-                 APPVEYOR_REPO_COMMIT_AUTHOR="Mike-EEE's GitHub Action Automation Agent"
-                 APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL="Mike-EEE@users.noreply.github.com"
-               }
+               # environmentVariables=@{
+               #  APPVEYOR_REPO_COMMIT_AUTHOR="Mike-EEE's GitHub Action Automation Agent"
+               #  APPVEYOR_REPO_COMMIT_AUTHOR_EMAIL="Mike-EEE@users.noreply.github.com"
+               # }
            }
            $body = $body | ConvertTo-Json
 
